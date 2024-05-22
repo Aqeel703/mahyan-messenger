@@ -21,7 +21,8 @@ const sendMessageToGroup = async (groupChatId, message) => {
 };
 app.post("/api/telegram/botmessage", async (req, res) => {
   try {
-    const { message, groupChatId } = req.body;
+    const message = req.body.message;
+    const groupChatId = req.body.groupChatId;
 
     const finalResp = await sendMessageToGroup(groupChatId, message);
     console.log(finalResp);
@@ -30,6 +31,7 @@ app.post("/api/telegram/botmessage", async (req, res) => {
     console.log(error);
     res.status(500).json({ error: error.message });
   }
+  //
 });
 
 app.get("/", (req, res) => res.send("server is runing..."));
